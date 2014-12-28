@@ -5,7 +5,7 @@ Tags: widget, wikipedia, wikipedia anniversaries, wikipedia widget, anniversarie
 Author: Piotr Pesta
 Requires at least: 2.8.0
 Tested up to: 4.0.1
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -31,3 +31,5 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 == Changelog ==
 * 1.0.0
 Initial Release
+* 1.0.1
+minor bug fixed (in PL lang)

@@ -12,7 +12,7 @@ function wikiPLkalendarium() {
 	$data = strip_tags($data, '<ul>, <li>'); //wywala ca≥y html
 	$data = trim(preg_replace('/\s+/', ' ', $data)); //usuwa wszystkie, niepotrzebne przerwy, entery itp.
 	$start = "Rocznice";
-	$end = "([0-9]|[0-9][0-9])(\s)(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|wrzeúnia|paüdziernika|listopada|grudnia)";
+	$end = "([0-9]|[0-9][0-9])(\s)(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|wrzeúnia|paüdziernika|listopada|grudnia)(\s)";
 
 	function getTextBetweenTagsKalendarium($start, $end, $data){
  		$matches = array();
