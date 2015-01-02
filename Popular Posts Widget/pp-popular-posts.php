@@ -83,6 +83,8 @@ echo $before_title . $title . $after_title;
 
 $postID = get_the_ID();
 
+show_views($postID);
+
 add_views($postID);
 
 echo $after_widget;
