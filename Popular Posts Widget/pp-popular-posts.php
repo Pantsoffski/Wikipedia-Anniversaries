@@ -46,13 +46,42 @@ function popular_posts_statistics() {
 function form($instance) {
 
 // nadawanie i łączenie defaultowych wartości
-	$defaults = array('title' => '');
+	$defaults = array('numberofdays' => '7', 'posnumber' => '5', 'title' => '');
 	$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 
 <p>
 	<label for="<?php echo $this->get_field_id( 'title' ); ?>">Title:</label>
 	<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo $instance['title']; ?>" style="width:100%;" />
+</p>
+
+<p>
+<label for="<?php echo $this->get_field_id( 'posnumber' ); ?>">Number of positions:</label>
+<select id="<?php echo $this->get_field_id( 'posnumber' ); ?>" name="<?php echo $this->get_field_name('posnumber'); ?>" value="<?php echo $instance['posnumber']; ?>" style="width:100%;">	
+	<option value="1" <?php if ($instance['posnumber']==1) {echo "selected"; } ?>>1</option>
+	<option value="2" <?php if ($instance['posnumber']==2) {echo "selected"; } ?>>2</option>
+	<option value="3" <?php if ($instance['posnumber']==3) {echo "selected"; } ?>>3</option>
+	<option value="4" <?php if ($instance['posnumber']==4) {echo "selected"; } ?>>4</option>
+	<option value="5" <?php if ($instance['posnumber']==5) {echo "selected"; } ?>>5</option>
+	<option value="6" <?php if ($instance['posnumber']==6) {echo "selected"; } ?>>6</option>
+	<option value="7" <?php if ($instance['posnumber']==7) {echo "selected"; } ?>>7</option>
+	<option value="8" <?php if ($instance['posnumber']==8) {echo "selected"; } ?>>8</option>
+	<option value="9" <?php if ($instance['posnumber']==9) {echo "selected"; } ?>>9</option>
+	<option value="10" <?php if ($instance['posnumber']==10) {echo "selected"; } ?>>10</option>
+</select>
+</p>
+
+<p>
+<label for="<?php echo $this->get_field_id( 'numberofdays' ); ?>">Number of days:</label>
+<select id="<?php echo $this->get_field_id( 'numberofdays' ); ?>" name="<?php echo $this->get_field_name('numberofdays'); ?>" value="<?php echo $instance['numberofdays']; ?>" style="width:100%;">	
+	<option value="1" <?php if ($instance['numberofdays']==1) {echo "selected"; } ?>>1</option>
+	<option value="2" <?php if ($instance['numberofdays']==2) {echo "selected"; } ?>>2</option>
+	<option value="3" <?php if ($instance['numberofdays']==3) {echo "selected"; } ?>>3</option>
+	<option value="4" <?php if ($instance['numberofdays']==4) {echo "selected"; } ?>>4</option>
+	<option value="5" <?php if ($instance['numberofdays']==5) {echo "selected"; } ?>>5</option>
+	<option value="6" <?php if ($instance['numberofdays']==6) {echo "selected"; } ?>>6</option>
+	<option value="7" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>7</option>
+</select>
 </p>
 
 <?php
@@ -64,6 +93,8 @@ $instance = $old_instance;
 
 // Dostępne pola
 $instance['title'] = strip_tags($new_instance['title']);
+$instance['posnumber'] = strip_tags($new_instance['posnumber']);
+$instance['numberofdays'] = strip_tags($new_instance['numberofdays']);
 return $instance;
 }
 
@@ -73,7 +104,8 @@ extract( $args );
 
 // these are the widget options
 $title = apply_filters('widget_title', $instance['title']);
-
+$posnumber = $instance['posnumber'];
+$numberofdays = $instance['numberofdays'];
 echo $before_widget;
 
 // Check if title is set
@@ -83,7 +115,7 @@ echo $before_title . $title . $after_title;
 
 $postID = get_the_ID();
 
-show_views($postID);
+show_views($postID, $posnumber, $numberofdays);
 
 add_views($postID);
 
