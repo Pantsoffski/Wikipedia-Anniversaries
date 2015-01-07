@@ -115,7 +115,9 @@ echo $before_title . $title . $after_title;
 
 $postID = get_the_ID();
 
+echo '<div id="pp-container">';
 show_views($postID, $posnumber, $numberofdays);
+echo '</div>';
 
 add_views($postID);
 

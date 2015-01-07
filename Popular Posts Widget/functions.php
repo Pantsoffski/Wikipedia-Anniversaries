@@ -23,9 +23,43 @@ function show_views($postID, $posnumber, $numberofdays) {
 		$post_id_number = $wpdb->get_results("SELECT post_id FROM $popular_posts_statistics_table WHERE date >= CURDATE() - INTERVAL $numberofdays DAY ORDER BY hit_count DESC LIMIT $posnumber", ARRAY_A);
 		for ($i = 0; $i < count($post_id_number); ++$i) {
 			$post_number = $post_id_number[$i]['post_id'];
+			$countbeginning = "<br /><span id=\"pp-count\">";
+			$countending = " visits</span></span><br />";
 			$post_name_by_id = $wpdb->get_results("SELECT post_title FROM $posts_table WHERE ID = $post_number", ARRAY_A);
-			echo $post_name_by_id[0]['post_title'] . " | ";
-			echo $result[$i]['hit_count'] . "<br />";
+			if ($i == 0){
+				echo '<span id="pp-1-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 1){
+				echo '<span id="pp-2-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 2){
+				echo '<span id="pp-3-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 3){
+				echo '<span id="pp-4-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 4){
+				echo '<span id="pp-5-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 5){
+				echo '<span id="pp-6-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 6){
+				echo '<span id="pp-7-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 7){
+				echo '<span id="pp-8-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 8){
+				echo '<span id="pp-9-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 9){
+				echo '<span id="pp-10-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			} else if($i == 10){
+				echo '<span id="pp-11-title">' . $post_name_by_id[0]['post_title'];
+				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+			}
 		}
 	}
 }
