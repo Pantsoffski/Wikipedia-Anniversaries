@@ -29,11 +29,14 @@ function popular_posts_statistics_activate() {
 // podczas odinstalowania - usuwanie tabeli
 function popular_posts_statistics_uninstall() {
 	global $wpdb;
+	delete_option('widget_popular_posts_statistics');
 	$popular_posts_statistics_table = $wpdb->prefix . 'popular_posts_statistics';
 	$wpdb->query( "DROP TABLE IF EXISTS $popular_posts_statistics_table" );
 }
 
 class popular_posts_statistics extends WP_Widget {
+
+public $cssselector;
 
 // konstruktor widgetu
 function popular_posts_statistics() {
@@ -46,7 +49,7 @@ function popular_posts_statistics() {
 function form($instance) {
 
 // nadawanie i łączenie defaultowych wartości
-	$defaults = array('numberofdays' => '7', 'posnumber' => '5', 'title' => '');
+	$defaults = array('cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
 	$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 
@@ -84,6 +87,15 @@ function form($instance) {
 </select>
 </p>
 
+<p>
+<label for="<?php echo $this->get_field_id( 'cssselector' ); ?>">Style Select:</label>
+<select id="<?php echo $this->get_field_id( 'cssselector' ); ?>" name="<?php echo $this->get_field_name('cssselector'); ?>" value="<?php echo $instance['cssselector']; ?>" style="width:100%;">	
+	<option value="1" <?php if ($instance['cssselector']==1) {echo "selected"; } ?>>Style no. 1</option>
+	<option value="2" <?php if ($instance['cssselector']==2) {echo "selected"; } ?>>Style no. 2</option>
+	<option value="3" <?php if ($instance['cssselector']==3) {echo "selected"; } ?>>Style no. 3</option>
+</select>
+</p>
+
 <?php
 
 }
@@ -95,21 +107,23 @@ $instance = $old_instance;
 $instance['title'] = strip_tags($new_instance['title']);
 $instance['posnumber'] = strip_tags($new_instance['posnumber']);
 $instance['numberofdays'] = strip_tags($new_instance['numberofdays']);
+$instance['cssselector'] = strip_tags($new_instance['cssselector']);
 return $instance;
 }
 
 // wyswietlanie widgetu, front end (widget)
 function widget($args, $instance) {
-extract( $args );
+extract($args);
 
-// these are the widget options
+// to są funkcje widgetu
 $title = apply_filters('widget_title', $instance['title']);
 $posnumber = $instance['posnumber'];
 $numberofdays = $instance['numberofdays'];
+$cssselector = $instance['cssselector'];
 echo $before_widget;
 
-// Check if title is set
-if ( $title ) {
+// Sprawdzanie, czy istnieje tytuł
+if ($title) {
 echo $before_title . $title . $after_title;
 }
 
@@ -125,11 +139,13 @@ echo $after_widget;
 }
 }
 
-// register widget
+// rejestracja widgetu
 add_action('widgets_init', create_function('', 'return register_widget("popular_posts_statistics");'));
 
-add_action('wp_enqueue_scripts', function () { 
-        wp_enqueue_style( 'popular_posts_statistics', plugins_url('style-popular-posts-statistics.css', __FILE__));
+add_action('wp_enqueue_scripts', function () {
+	$cssselect = get_option('widget_popular_posts_statistics'); //pobieranie opcji z bazy danych
+	$cssselect = $cssselect['2']['cssselector']; //wypluwanie odpowiedniej tablicy i jej wartości
+	wp_enqueue_style('popular_posts_statistics', plugins_url(choose_style($cssselect), __FILE__)); //nazwa pliku uzależniona od funkcji i aktualnie obowiązującej opcji
     });
 
 ?>
