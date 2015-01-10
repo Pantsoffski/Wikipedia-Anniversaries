@@ -51,6 +51,7 @@ function wikiEN() {
 }
 
 function wikiDE() {
+	$ch = curl_init();
 	curl_setopt($ch,CURLOPT_URL,"http://de.wikipedia.org/wiki/Wikipedia:Hauptseite");
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
 		curl_setopt($ch,CURLOPT_MAXREDIRS,10);

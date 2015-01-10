@@ -4,7 +4,7 @@ Plugin Name: Wiki on Medal
 Plugin URI: http://smartfan.pl/
 Description: Widget that shows article on medal from Wikipedia.
 Author: Piotr Pesta
-Version: 1.0
+Version: 1.0.1
 Author URI: http://smartfan.pl/
 License: GPL12
 */
