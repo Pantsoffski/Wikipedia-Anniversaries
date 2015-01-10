@@ -4,7 +4,7 @@ Plugin Name: Wikipedia Anniversaries
 Plugin URI: http://smartfan.pl/
 Description: Widget that shows anniversaries from Wikipedia.
 Author: Piotr Pesta
-Version: 1.0.1
+Version: 1.0.2
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -48,6 +48,7 @@ function form($instance) {
 	<option value="1" <?php if ($instance['languages']==1) {echo "selected"; } ?>>English</option>
 	<option value="2" <?php if ($instance['languages']==2) {echo "selected"; } ?>>Deutsch</option>
 	<option value="3" <?php if ($instance['languages']==3) {echo "selected"; } ?>>Polish</option>
+	<option value="4" <?php if ($instance['languages']==4) {echo "selected"; } ?>>Persian</option>
 </select>
 </p>
 
@@ -75,6 +76,9 @@ if ($languages == 1) {
 elseif ($languages == 2) {
 	wikiDEkalendarium();
 }
+elseif ($languages == 4) {
+	wikiPEkalendarium();
+	}
 else {
 	wikiPLkalendarium();
 }

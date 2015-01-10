@@ -9,10 +9,10 @@ function wikiPLkalendarium() {
 		curl_setopt($ch,CURLOPT_USERAGENT,"wiki on day");
 		curl_setopt($ch,CURLOPT_HTTP_VERSION,'CURLOPT_HTTP_VERSION_1_1');
 	$data = curl_exec($ch);
-	$data = strip_tags($data, '<ul>, <li>'); //wywala ca�y html
+	$data = strip_tags($data, '<ul>, <li>'); //wywala cały html
 	$data = trim(preg_replace('/\s+/', ' ', $data)); //usuwa wszystkie, niepotrzebne przerwy, entery itp.
 	$start = "Rocznice";
-	$end = "([0-9]|[0-9][0-9])(\s)(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|wrze�nia|pa�dziernika|listopada|grudnia)(\s)";
+	$end = "([0-9]|[0-9][0-9])(\s)(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)(\s)";
 
 	function getTextBetweenTagsKalendarium($start, $end, $data){
  		$matches = array();
@@ -34,7 +34,7 @@ function wikiENkalendarium() {
 		curl_setopt($ch,CURLOPT_USERAGENT,"wiki on day");
 		curl_setopt($ch,CURLOPT_HTTP_VERSION,'CURLOPT_HTTP_VERSION_1_1');
 	$data = curl_exec($ch);
-	$data = strip_tags($data, '<ul>, <li>'); //wywala ca�y html
+	$data = strip_tags($data, '<ul>, <li>'); //wywala cały html
 	$data = trim(preg_replace('/\s+/', ' ', $data)); //usuwa wszystkie, niepotrzebne przerwy, entery itp.
 	$start = "On this day...";
 	$end = "More anniversaries";
@@ -59,10 +59,35 @@ function wikiDEkalendarium() {
 		curl_setopt($ch,CURLOPT_USERAGENT,"wiki on day");
 		curl_setopt($ch,CURLOPT_HTTP_VERSION,'CURLOPT_HTTP_VERSION_1_1');
 	$data = curl_exec($ch);
-	$data = strip_tags($data, '<ul>, <li>'); //wywala ca�y html
+	$data = strip_tags($data, '<ul>, <li>'); //wywala cały html
 	$data = trim(preg_replace('/\s+/', ' ', $data)); //usuwa wszystkie, niepotrzebne przerwy, entery itp.
 	$start = "Was geschah am .{1,2}.\s\D+\?";
 	$end = "Weitere Ereignisse";
+
+	function getTextBetweenTagsKalendarium($start, $end, $data){
+ 		$matches = array();
+    	$pattern = "/$start.(.*?).$end/";
+    	if (preg_match($pattern, $data, $matches)) {
+			echo "<div class=\"wikiday\">" . $matches[1] . "</div>";
+		}
+ 	}
+
+	return getTextBetweenTagsKalendarium($start, $end, $data);
+}
+
+function wikiPEkalendarium() {
+	$ch = curl_init();
+	curl_setopt($ch,CURLOPT_URL,"http://fa.wikipedia.org/wiki/صفحهٔ_اصلی");
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER,1);
+		curl_setopt($ch,CURLOPT_MAXREDIRS,10);
+		curl_setopt($ch,CURLOPT_CONNECTTIMEOUT,70);
+		curl_setopt($ch,CURLOPT_USERAGENT,"wiki on day");
+		curl_setopt($ch,CURLOPT_HTTP_VERSION,'CURLOPT_HTTP_VERSION_1_1');
+	$data = curl_exec($ch);
+	$data = strip_tags($data, '<ul>, <li>'); //wywala cały html
+	$data = trim(preg_replace('/\s+/', ' ', $data)); //usuwa wszystkie, niepotrzebne przerwy, entery itp.
+	$start = "امروز:";
+	$end = "→";
 
 	function getTextBetweenTagsKalendarium($start, $end, $data){
  		$matches = array();
