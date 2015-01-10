@@ -11,6 +11,8 @@ License: GPL12
 
 include 'functions.php';
 
+$options = get_option('widget_popular_posts_statistics');
+
 register_activation_hook(__FILE__, 'popular_posts_statistics_activate'); //akcja podczas aktywacji pluginu
 register_uninstall_hook(__FILE__, 'popular_posts_statistics_uninstall'); //akcja podczas deaktywacji pluginu
 
@@ -30,13 +32,10 @@ function popular_posts_statistics_activate() {
 function popular_posts_statistics_uninstall() {
 	global $wpdb;
 	delete_option('widget_popular_posts_statistics');
-	$popular_posts_statistics_table = $wpdb->prefix . 'popular_posts_statistics';
 	$wpdb->query( "DROP TABLE IF EXISTS $popular_posts_statistics_table" );
 }
 
 class popular_posts_statistics extends WP_Widget {
-
-public $cssselector;
 
 // konstruktor widgetu
 function popular_posts_statistics() {
@@ -49,7 +48,7 @@ function popular_posts_statistics() {
 function form($instance) {
 
 // nadawanie i łączenie defaultowych wartości
-	$defaults = array('cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
+	$defaults = array('hitsonoff' => '1', 'cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
 	$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 
@@ -76,7 +75,7 @@ function form($instance) {
 
 <p>
 <label for="<?php echo $this->get_field_id( 'numberofdays' ); ?>">Number of days:</label>
-<select id="<?php echo $this->get_field_id( 'numberofdays' ); ?>" name="<?php echo $this->get_field_name('numberofdays'); ?>" value="<?php echo $instance['numberofdays']; ?>" style="width:100%;">	
+<select id="<?php echo $this->get_field_id( 'numberofdays' ); ?>" name="<?php echo $this->get_field_name('numberofdays'); ?>" value="<?php echo $instance['numberofdays']; ?>" style="width:100%;">
 	<option value="1" <?php if ($instance['numberofdays']==1) {echo "selected"; } ?>>1</option>
 	<option value="2" <?php if ($instance['numberofdays']==2) {echo "selected"; } ?>>2</option>
 	<option value="3" <?php if ($instance['numberofdays']==3) {echo "selected"; } ?>>3</option>
@@ -85,6 +84,11 @@ function form($instance) {
 	<option value="6" <?php if ($instance['numberofdays']==6) {echo "selected"; } ?>>6</option>
 	<option value="7" <?php if ($instance['numberofdays']==7) {echo "selected"; } ?>>7</option>
 </select>
+</p>
+
+<p>
+<input type="checkbox" id="<?php echo $this->get_field_id( 'hitsonoff' ); ?>" name="<?php echo $this->get_field_name('hitsonoff'); ?>" value="1" <?php checked($instance['hitsonoff'], 1); ?>/>
+<label for="<?php echo $this->get_field_id( 'hitsonoff' ); ?>">Show hit count number?</label>
 </p>
 
 <p>
@@ -108,6 +112,7 @@ $instance['title'] = strip_tags($new_instance['title']);
 $instance['posnumber'] = strip_tags($new_instance['posnumber']);
 $instance['numberofdays'] = strip_tags($new_instance['numberofdays']);
 $instance['cssselector'] = strip_tags($new_instance['cssselector']);
+$instance['hitsonoff'] = strip_tags($new_instance['hitsonoff']);
 return $instance;
 }
 
@@ -120,6 +125,7 @@ $title = apply_filters('widget_title', $instance['title']);
 $posnumber = $instance['posnumber'];
 $numberofdays = $instance['numberofdays'];
 $cssselector = $instance['cssselector'];
+$hitsonoff = $instance['hitsonoff'];
 echo $before_widget;
 
 // Sprawdzanie, czy istnieje tytuł
@@ -130,7 +136,7 @@ echo $before_title . $title . $after_title;
 $postID = get_the_ID();
 
 echo '<div id="pp-container">';
-show_views($postID, $posnumber, $numberofdays);
+show_views($postID, $posnumber, $numberofdays, $hitsonoff);
 echo '</div>';
 
 add_views($postID);
@@ -144,7 +150,7 @@ add_action('widgets_init', create_function('', 'return register_widget("popular_
 
 add_action('wp_enqueue_scripts', function () {
 	$cssselect = get_option('widget_popular_posts_statistics'); //pobieranie opcji z bazy danych
-	$cssselect = $cssselect['2']['cssselector']; //wypluwanie odpowiedniej tablicy i jej wartości
+	$cssselect = $cssselect['5']['cssselector']; //wypluwanie odpowiedniej tablicy i jej wartości
 	wp_enqueue_style('popular_posts_statistics', plugins_url(choose_style($cssselect), __FILE__)); //nazwa pliku uzależniona od funkcji i aktualnie obowiązującej opcji
     });
 

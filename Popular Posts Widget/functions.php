@@ -14,7 +14,7 @@ function add_views($postID) {
 }
 
 //wyświetlanie wyników
-function show_views($postID, $posnumber, $numberofdays) {
+function show_views($postID, $posnumber, $numberofdays, $hitsonoff) {
 	global $wpdb;
 	$popular_posts_statistics_table = $wpdb->prefix . 'popular_posts_statistics';
 	$posts_table = $wpdb->prefix . 'posts';
@@ -25,7 +25,7 @@ function show_views($postID, $posnumber, $numberofdays) {
 			$post_number = $post_id_number[$i]['post_id'];
 			$post_link = get_permalink($post_number); //zdobywanie permalinka
 			$countbeginning = "<br /><span id=\"pp-count\">";
-			$countending = " visits</span></span><br />";
+			$countending = " visit(s)</span></span><br />";
 			$post_name_by_id = $wpdb->get_results("SELECT post_title FROM $posts_table WHERE ID = $post_number", ARRAY_A);
 			if (!$post_name_by_id){ //sprawdza, czy post o danym ID istnieje, jeśli nie - kasuje rekord i przerywa skrypt (który by wyświetlał błąd w pierwszej linii)
 				$wpdb->query("DELETE FROM $popular_posts_statistics_table WHERE post_id = $post_number");
@@ -33,34 +33,74 @@ function show_views($postID, $posnumber, $numberofdays) {
 			}
 			if ($i == 0){
 				echo '<span id="pp-1-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 1){
-				echo '<span id="pp-2-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-2-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 2){
-				echo '<span id="pp-3-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-3-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 3){
-				echo '<span id="pp-4-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-4-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 4){
-				echo '<span id="pp-5-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-5-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 5){
-				echo '<span id="pp-6-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-6-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 6){
-				echo '<span id="pp-7-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-7-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 7){
-				echo '<span id="pp-8-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-8-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 8){
-				echo '<span id="pp-9-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-9-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			} else if($i == 9){
-				echo '<span id="pp-10-title">' . $post_name_by_id[0]['post_title'];
+				echo '<span id="pp-10-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
+				}else {
+					echo "</span><br />";
+				}
 			}
 		}
 	}
