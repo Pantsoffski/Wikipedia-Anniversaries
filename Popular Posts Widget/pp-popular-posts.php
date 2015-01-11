@@ -48,7 +48,7 @@ function popular_posts_statistics() {
 function form($instance) {
 
 // nadawanie i łączenie defaultowych wartości
-	$defaults = array('hitsonoff' => '1', 'cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
+	$defaults = array('ignoredcategories' => '', 'ignoredpages' => '', 'hitsonoff' => '1', 'cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
 	$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 
@@ -92,6 +92,16 @@ function form($instance) {
 </p>
 
 <p>
+	<label for="<?php echo $this->get_field_id( 'ignoredpages' ); ?>">If you would like to exclude any pages from being displayed, you can enter the Page IDs (comma separated, e.g. 34, 25, 439):</label>
+	<input id="<?php echo $this->get_field_id( 'ignoredpages' ); ?>" name="<?php echo $this->get_field_name( 'ignoredpages' ); ?>" value="<?php echo $instance['ignoredpages']; ?>" style="width:100%;" />
+</p>
+
+<p>
+	<label for="<?php echo $this->get_field_id( 'ignoredcategories' ); ?>">If you would like to exclude any categories from being displayed, you can enter the Category IDs (comma separated, e.g. 3, 5, 10):</label>
+	<input id="<?php echo $this->get_field_id( 'ignoredcategories' ); ?>" name="<?php echo $this->get_field_name( 'ignoredcategories' ); ?>" value="<?php echo $instance['ignoredcategories']; ?>" style="width:100%;" />
+</p>
+
+<p>
 <label for="<?php echo $this->get_field_id( 'cssselector' ); ?>">Style Select:</label>
 <select id="<?php echo $this->get_field_id( 'cssselector' ); ?>" name="<?php echo $this->get_field_name('cssselector'); ?>" value="<?php echo $instance['cssselector']; ?>" style="width:100%;">	
 	<option value="1" <?php if ($instance['cssselector']==1) {echo "selected"; } ?>>Style no. 1</option>
@@ -113,6 +123,8 @@ $instance['posnumber'] = strip_tags($new_instance['posnumber']);
 $instance['numberofdays'] = strip_tags($new_instance['numberofdays']);
 $instance['cssselector'] = strip_tags($new_instance['cssselector']);
 $instance['hitsonoff'] = strip_tags($new_instance['hitsonoff']);
+$instance['ignoredpages'] = strip_tags($new_instance['ignoredpages']);
+$instance['ignoredcategories'] = strip_tags($new_instance['ignoredcategories']);
 return $instance;
 }
 
@@ -126,6 +138,12 @@ $posnumber = $instance['posnumber'];
 $numberofdays = $instance['numberofdays'];
 $cssselector = $instance['cssselector'];
 $hitsonoff = $instance['hitsonoff'];
+$ignoredpages = $instance['ignoredpages'];
+$ignoredpages = trim(preg_replace('/\s+/', '', $ignoredpages));
+$ignoredpages = explode(",",$ignoredpages);
+$ignoredcategories = $instance['ignoredcategories'];
+$ignoredcategories = trim(preg_replace('/\s+/', '', $ignoredcategories));
+$ignoredcategories = explode(",",$ignoredcategories);
 echo $before_widget;
 
 // Sprawdzanie, czy istnieje tytuł
@@ -136,8 +154,12 @@ echo $before_title . $title . $after_title;
 $postID = get_the_ID();
 
 echo '<div id="pp-container">';
-show_views($postID, $posnumber, $numberofdays, $hitsonoff);
+show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories);
 echo '</div>';
+/*$catid = get_the_category( 22 );
+var_dump($catid);
+$dupa = $catid[0]->cat_ID;
+var_dump($dupa);*/
 
 add_views($postID);
 
