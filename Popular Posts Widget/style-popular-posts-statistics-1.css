@@ -15,7 +15,7 @@
 	font-size: 95% !important;
 }
 
-#pp-1-title {
+#pp-0-title {
 	display: block;
 	border-style: solid;
 	border-color: black;
@@ -26,7 +26,7 @@
 	border-radius: 7px;
 }
 
-#pp-2-title {
+#pp-1-title {
 	display: block;
 	border-style: solid;
 	border-color: black;
@@ -37,7 +37,7 @@
 	border-radius: 7px;
 }
 
-#pp-3-title {
+#pp-2-title {
 	display: block;
 	border-style: solid;
 	border-color: black;
@@ -48,7 +48,7 @@
 	border-radius: 7px;
 }
 
-#pp-4-title {
+#pp-3-title {
 	display: block;
 	border-style: solid;
 	border-color: black;
@@ -59,13 +59,24 @@
 	border-radius: 7px;
 }
 
+#pp-4-title {
+	display: block;
+	border-style: solid;
+	border-color: black;
+	border-width: 1px;
+	background-color: #94b416;
+	width: 88%;
+	padding: 5px;
+	border-radius: 7px;
+}
+
 #pp-5-title {
 	display: block;
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;
-	background-color: #1bdfe4;
-	width: 88%;
+	background-color: #02bec8;
+	width: 85%;
 	padding: 5px;
 	border-radius: 7px;
 }
@@ -75,18 +86,7 @@
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;
-	background-color: #1bade4;
-	width: 85%;
-	padding: 5px;
-	border-radius: 7px;
-}
-
-#pp-7-title {
-	display: block;
-	border-style: solid;
-	border-color: black;
-	border-width: 1px;
-	background-color: #1b8ae4;
+	background-color: #52abe7;
 	width: 82%;
 	padding: 5px;
 	border-radius: 7px;
@@ -97,7 +97,7 @@
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;
-	background-color: #1b5ce4;
+	background-color: #4993e4;
 	width: 79%;
 	padding: 5px;
 	border-radius: 7px;
@@ -108,7 +108,7 @@
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;
-	background-color: #1b5ce4;
+	background-color: #1d6fc9;
 	width: 76%;
 	padding: 5px;
 	border-radius: 7px;
@@ -119,19 +119,8 @@
 	border-style: solid;
 	border-color: black;
 	border-width: 1px;
-	background-color: #1b5ce4;
+	background-color: #203ee3;
 	width: 73%;
-	padding: 5px;
-	border-radius: 7px;
-}
-
-#pp-10-title {
-	display: block;
-	border-style: solid;
-	border-color: black;
-	border-width: 1px;
-	background-color: #7b20df;
-	width: 70%;
 	padding: 5px;
 	border-radius: 7px;
 }

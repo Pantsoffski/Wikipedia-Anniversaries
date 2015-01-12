@@ -60,16 +60,16 @@ function form($instance) {
 <p>
 <label for="<?php echo $this->get_field_id( 'posnumber' ); ?>">Number of positions:</label>
 <select id="<?php echo $this->get_field_id( 'posnumber' ); ?>" name="<?php echo $this->get_field_name('posnumber'); ?>" value="<?php echo $instance['posnumber']; ?>" style="width:100%;">	
-	<option value="1" <?php if ($instance['posnumber']==1) {echo "selected"; } ?>>1</option>
-	<option value="2" <?php if ($instance['posnumber']==2) {echo "selected"; } ?>>2</option>
-	<option value="3" <?php if ($instance['posnumber']==3) {echo "selected"; } ?>>3</option>
-	<option value="4" <?php if ($instance['posnumber']==4) {echo "selected"; } ?>>4</option>
-	<option value="5" <?php if ($instance['posnumber']==5) {echo "selected"; } ?>>5</option>
-	<option value="6" <?php if ($instance['posnumber']==6) {echo "selected"; } ?>>6</option>
-	<option value="7" <?php if ($instance['posnumber']==7) {echo "selected"; } ?>>7</option>
-	<option value="8" <?php if ($instance['posnumber']==8) {echo "selected"; } ?>>8</option>
-	<option value="9" <?php if ($instance['posnumber']==9) {echo "selected"; } ?>>9</option>
-	<option value="10" <?php if ($instance['posnumber']==10) {echo "selected"; } ?>>10</option>
+	<option value="2" <?php if ($instance['posnumber']==2) {echo "selected"; } ?>>1</option>
+	<option value="3" <?php if ($instance['posnumber']==3) {echo "selected"; } ?>>2</option>
+	<option value="4" <?php if ($instance['posnumber']==4) {echo "selected"; } ?>>3</option>
+	<option value="5" <?php if ($instance['posnumber']==5) {echo "selected"; } ?>>4</option>
+	<option value="6" <?php if ($instance['posnumber']==6) {echo "selected"; } ?>>5</option>
+	<option value="7" <?php if ($instance['posnumber']==7) {echo "selected"; } ?>>6</option>
+	<option value="8" <?php if ($instance['posnumber']==8) {echo "selected"; } ?>>7</option>
+	<option value="9" <?php if ($instance['posnumber']==9) {echo "selected"; } ?>>8</option>
+	<option value="10" <?php if ($instance['posnumber']==10) {echo "selected"; } ?>>9</option>
+	<option value="11" <?php if ($instance['posnumber']==11) {echo "selected"; } ?>>10</option>
 </select>
 </p>
 
@@ -156,10 +156,6 @@ $postID = get_the_ID();
 echo '<div id="pp-container">';
 show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories);
 echo '</div>';
-/*$catid = get_the_category( 22 );
-var_dump($catid);
-$dupa = $catid[0]->cat_ID;
-var_dump($dupa);*/
 
 add_views($postID);
 
@@ -171,9 +167,12 @@ echo $after_widget;
 add_action('widgets_init', create_function('', 'return register_widget("popular_posts_statistics");'));
 
 add_action('wp_enqueue_scripts', function () {
-	$cssselect = get_option('widget_popular_posts_statistics'); //pobieranie opcji z bazy danych
-	$cssselect = $cssselect['5']['cssselector']; //wypluwanie odpowiedniej tablicy i jej wartości
-	wp_enqueue_style('popular_posts_statistics', plugins_url(choose_style($cssselect), __FILE__)); //nazwa pliku uzależniona od funkcji i aktualnie obowiązującej opcji
+	$css_select = get_option('widget_popular_posts_statistics'); //pobieranie opcji z bazy danych
+	$css_sel = array();
+	foreach($css_select as $css_selector){
+		$css_sel[] = $css_selector['cssselector'];
+	}
+	wp_enqueue_style('popular_posts_statistics', plugins_url(choose_style($css_sel[0]), __FILE__)); //nazwa pliku uzależniona od funkcji i aktualnie obowiązującej opcji
     });
 
 ?>

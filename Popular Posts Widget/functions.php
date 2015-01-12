@@ -4,9 +4,9 @@
 function add_views($postID) {
 	global $wpdb;
 	$popular_posts_statistics_table = $wpdb->prefix . 'popular_posts_statistics';
-	if (!$wpdb->query("SELECT hit_count FROM $popular_posts_statistics_table WHERE post_id = $postID") && $postID != 1 && $postID != 27227) { //jeśli nie istnieje rekord hit_count w z podanym ID oraz ID nie jest równe 1
+	if (!$wpdb->query("SELECT hit_count FROM $popular_posts_statistics_table WHERE post_id = $postID") && $postID != 1) { //jeśli nie istnieje rekord hit_count w z podanym ID oraz ID nie jest równe 1
 		$result = $wpdb->query("INSERT INTO $popular_posts_statistics_table (post_id, hit_count, date) VALUES ($postID, 1, NOW())"); //dodaje do tablicy id postu, date oraz hit
-	}elseif ($postID != 1 && $postID != 27227) { //w innym przypadku...
+	}elseif ($postID != 1) { //w innym przypadku...
 		$hitsnumber = $wpdb->get_results("SELECT hit_count FROM $popular_posts_statistics_table WHERE post_id = $postID", ARRAY_A);
 		$hitsnumber = $hitsnumber[0]['hit_count'];
 		$result = $wpdb->query("UPDATE $popular_posts_statistics_table SET hit_count = $hitsnumber + 1, date =  NOW() WHERE post_id = $postID");
@@ -38,72 +38,10 @@ function show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpage
 			}else {
 				$cat_or_post_check = FALSE;
 			}
-			if ($i == 0 && $cat_or_post_check == FALSE){
-				echo '<span id="pp-1-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
+			if ($cat_or_post_check == FALSE) {
+				static $x = 0;
+				echo '<span id="pp-' . $x++ . '-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
 				if ($hitsonoff) { //wyłącza wyświetlanie liczby odsłon, jeśli użytkownik wyłączył taką opcję
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 1 && $cat_or_post_check == FALSE){
-				echo '<span id="pp-2-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 2 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-3-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 3 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-4-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 4 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-5-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 5 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-6-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 6 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-7-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 7 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-8-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 8 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-9-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
-				echo $countbeginning . $result[$i]['hit_count'] . $countending;
-				}else {
-					echo "</span><br />";
-				}
-			} else if($i == 9 && !in_array($post_number, $ignoredpages)){
-				echo '<span id="pp-10-title">' . '<a href="' . $post_link . '">' . $post_name_by_id[0]['post_title'] . '</a>';
-				if ($hitsonoff) {
 				echo $countbeginning . $result[$i]['hit_count'] . $countending;
 				}else {
 					echo "</span><br />";
@@ -114,12 +52,12 @@ function show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpage
 }
 
 //wybór stylu
-function choose_style($cssselector) {
-	if($cssselector == 1){
+function choose_style($css_sel) {
+	if($css_sel == 1){
 		return 'style-popular-posts-statistics-1.css';
-	} elseif($cssselector == 2){
+	} elseif($css_sel == 2){
 		return 'style-popular-posts-statistics-2.css';
-	} elseif($cssselector == 3){
+	} elseif($css_sel == 3){
 		return 'style-popular-posts-statistics-3.css';
 	}
 }
