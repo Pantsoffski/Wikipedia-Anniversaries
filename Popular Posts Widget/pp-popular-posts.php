@@ -48,7 +48,7 @@ function popular_posts_statistics() {
 function form($instance) {
 
 // nadawanie i łączenie defaultowych wartości
-	$defaults = array('ignoredcategories' => '', 'ignoredpages' => '', 'hitsonoff' => '1', 'cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
+	$defaults = array('visitstext' => 'visit(s)', 'ignoredcategories' => '', 'ignoredpages' => '', 'hitsonoff' => '1', 'cssselector' => '1', 'numberofdays' => '7', 'posnumber' => '5', 'title' => 'Popular Posts By Views In The Last 7 Days');
 	$instance = wp_parse_args( (array) $instance, $defaults );
 ?>
 
@@ -104,10 +104,16 @@ function form($instance) {
 <p>
 <label for="<?php echo $this->get_field_id( 'cssselector' ); ?>">Style Select:</label>
 <select id="<?php echo $this->get_field_id( 'cssselector' ); ?>" name="<?php echo $this->get_field_name('cssselector'); ?>" value="<?php echo $instance['cssselector']; ?>" style="width:100%;">	
-	<option value="1" <?php if ($instance['cssselector']==1) {echo "selected"; } ?>>Style no. 1</option>
-	<option value="2" <?php if ($instance['cssselector']==2) {echo "selected"; } ?>>Style no. 2</option>
-	<option value="3" <?php if ($instance['cssselector']==3) {echo "selected"; } ?>>Style no. 3</option>
+	<option value="1" <?php if ($instance['cssselector']==1) {echo "selected"; } ?>>Style no. 1 (color bars)</option>
+	<option value="2" <?php if ($instance['cssselector']==2) {echo "selected"; } ?>>Style no. 2 (color bars + text with white outline)</option>
+	<option value="3" <?php if ($instance['cssselector']==3) {echo "selected"; } ?>>Style no. 3 (grey numbered list)</option>
+	<option value="4" <?php if ($instance['cssselector']==4) {echo "selected"; } ?>>Custom Style (custom.css)</option>
 </select>
+</p>
+
+<p>
+	<label for="<?php echo $this->get_field_id( 'visitstext' ); ?>">If you would like to change "visit(s)" text, you can do it here:</label>
+	<input id="<?php echo $this->get_field_id( 'visitstext' ); ?>" name="<?php echo $this->get_field_name( 'visitstext' ); ?>" value="<?php echo $instance['visitstext']; ?>" style="width:100%;" />
 </p>
 
 <?php
@@ -125,6 +131,7 @@ $instance['cssselector'] = strip_tags($new_instance['cssselector']);
 $instance['hitsonoff'] = strip_tags($new_instance['hitsonoff']);
 $instance['ignoredpages'] = strip_tags($new_instance['ignoredpages']);
 $instance['ignoredcategories'] = strip_tags($new_instance['ignoredcategories']);
+$instance['visitstext'] = strip_tags($new_instance['visitstext']);
 return $instance;
 }
 
@@ -144,6 +151,7 @@ $ignoredpages = explode(",",$ignoredpages);
 $ignoredcategories = $instance['ignoredcategories'];
 $ignoredcategories = trim(preg_replace('/\s+/', '', $ignoredcategories));
 $ignoredcategories = explode(",",$ignoredcategories);
+$visitstext = $instance['visitstext'];
 echo $before_widget;
 
 // Sprawdzanie, czy istnieje tytuł
@@ -154,7 +162,7 @@ echo $before_title . $title . $after_title;
 $postID = get_the_ID();
 
 echo '<div id="pp-container">';
-show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories);
+show_views($postID, $posnumber, $numberofdays, $hitsonoff, $ignoredpages, $ignoredcategories, $visitstext);
 echo '</div>';
 
 add_views($postID);
