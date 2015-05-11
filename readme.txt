@@ -1,11 +1,12 @@
 === Wikipedia Anniversaries ===
 Contributors: Piotr Pesta
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EEDF5TV3M2WVG&lc=US
 Plugin Name: Wikipedia Anniversaries
 Plugin URI: http://smartfan.pl/
 Tags: widget, wikipedia, wikipedia anniversaries, wikipedia widget, anniversaries, calendar
 Author: Piotr Pesta
 Requires at least: 2.8.0
-Tested up to: 4.2.1
+Tested up to: 4.2
 Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -15,6 +16,8 @@ Wikipedia Anniversaries is a widget that lets your visitors to see important his
 == Description ==
 
 Wikipedia Anniversaries is a widget that lets your visitors to see important history dates from Wikipedia. Supported languages so far: Deutsch, Polish, English. More languages in the future. To customize style just edit style-wiki-this-day.css file.
+
+If you would like to show your support for this software, please consider donating: [Donate via PayPal](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=EEDF5TV3M2WVG&lc=US).
 
 == Installation ==
 
