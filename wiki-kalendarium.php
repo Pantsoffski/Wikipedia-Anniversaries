@@ -4,7 +4,7 @@ Plugin Name: Wikipedia Anniversaries
 Plugin URI: http://smartfan.pl/
 Description: Widget that shows anniversaries from Wikipedia.
 Author: Piotr Pesta
-Version: 1.0.2
+Version: 1.1.0
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -71,16 +71,20 @@ echo $before_title . $title . $after_title;
 }
 
 if ($languages == 1) {
-	wikiENkalendarium();
+	$f = new wikiLeech('http://en.wikipedia.org/wiki/Main_Page');
+	$f->showWiki('On this day...', 'More anniversaries');
 }
 elseif ($languages == 2) {
-	wikiDEkalendarium();
+	$f = new wikiLeech('http://de.wikipedia.org/wiki/Wikipedia:Hauptseite');
+	$f->showWiki('Was geschah am [^<>]*\?', 'Weitere Ereignisse');
 }
 elseif ($languages == 4) {
-	wikiPEkalendarium();
-	}
-else {
-	wikiPLkalendarium();
+	$f = new wikiLeech('http://fa.wikipedia.org/wiki/صفحهٔ_اصلی');
+	$f->showWiki('امروز', '→');
+}
+elseif ($languages == 3) {
+	$f = new wikiLeech('http://pl.wikipedia.org/wiki/Wikipedia:Strona_g%C5%82%C3%B3wna');
+	$f->showWiki('Rocznice', '([0-9]|[0-9][0-9])(\s)(stycznia|lutego|marca|kwietnia|maja|czerwca|lipca|sierpnia|września|października|listopada|grudnia)(\s)');
 }
 
 echo $after_widget;
