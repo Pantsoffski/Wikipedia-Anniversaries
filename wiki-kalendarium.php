@@ -4,7 +4,7 @@ Plugin Name: Wikipedia Anniversaries
 Plugin URI: http://smartfan.pl/
 Description: Widget that shows anniversaries from Wikipedia.
 Author: Piotr Pesta
-Version: 1.1.0
+Version: 1.1.5
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -70,9 +70,60 @@ if ( $title ) {
 echo $before_title . $title . $after_title;
 }
 
-if ($languages == 1) {
-	$f = new wikiLeech('http://en.wikipedia.org/wiki/Main_Page');
-	$f->showWiki('On this day...', 'More anniversaries');
+if ($languages == 1) { //english lang with local time 
+	$time = getdate();
+	$months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
+	$urlselected = 'https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries/';
+	if($time['mon'] == 1) {
+		$monthpush = $urlselected.$months[0];
+		$daypush = '<hr \/> '.$months[0].' '.$time['mday'];
+	}
+	if($time['mon'] == 2) {
+		$monthpush = $urlselected.$months[1];
+		$daypush = '<hr \/> '.$months[1].' '.$time['mday'];
+	}
+	if($time['mon'] == 3) {
+		$monthpush = $urlselected.$months[2];
+		$daypush = '<hr \/> '.$months[2].' '.$time['mday'];
+	}
+	if($time['mon'] == 4) {
+		$monthpush = $urlselected.$months[3];
+		$daypush = '<hr \/> '.$months[3].' '.$time['mday'];
+	}
+	if($time['mon'] == 5) {
+		$monthpush = $urlselected.$months[4];
+		$daypush = '<hr \/> '.$months[4].' '.$time['mday'];
+	}	
+	if($time['mon'] == 6) {
+		$monthpush = $urlselected.$months[5];
+		$daypush = '<hr \/> '.$months[5].' '.$time['mday'];
+	}
+	if($time['mon'] == 7) {
+		$monthpush = $urlselected.$months[6];
+		$daypush = '<hr \/> '.$months[6].' '.$time['mday'];
+	}
+	if($time['mon'] == 8) {
+		$monthpush = $urlselected.$months[7];
+		$daypush = '<hr \/> '.$months[7].' '.$time['mday'];
+	}
+	if($time['mon'] == 9) {
+		$monthpush = $urlselected.$months[8];
+		$daypush = '<hr \/> '.$months[8].' '.$time['mday'];
+	}
+	if($time['mon'] == 10) {
+		$monthpush = $urlselected.$months[9];
+		$daypush = '<hr \/> '.$months[9].' '.$time['mday'];
+	}
+	if($time['mon'] == 11) {
+		$monthpush = $urlselected.$months[10];
+		$daypush = '<hr \/> '.$months[10].' '.$time['mday'];
+	}
+	if($time['mon'] == 12) {
+		$monthpush = $urlselected.$months[11];
+		$daypush = '<hr \/> '.$months[11].' '.$time['mday'];
+	}
+	$f = new wikiLeech($monthpush);
+	$f->showWiki($daypush, 'More anniversaries:');
 }
 elseif ($languages == 2) {
 	$f = new wikiLeech('http://de.wikipedia.org/wiki/Wikipedia:Hauptseite');

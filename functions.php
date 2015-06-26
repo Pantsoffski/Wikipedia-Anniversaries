@@ -7,7 +7,7 @@ class wikiLeech {
 	
 	public function __construct($url) {
 		$data = file_get_contents($url);
-		$data = strip_tags($data, '<ul>, <li>'); //wywala cały html
+		$data = strip_tags($data, '<ul>, <li>, <hr>'); //wywala cały html
 		$this->data2 = trim(preg_replace('/\s+/', ' ', $data)); //usuwa wszystkie, niepotrzebne przerwy, entery itp.
 	}
 	
