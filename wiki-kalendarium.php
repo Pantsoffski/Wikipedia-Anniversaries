@@ -4,7 +4,7 @@ Plugin Name: Wikipedia Anniversaries
 Plugin URI: http://smartfan.pl/
 Description: Widget that shows anniversaries from Wikipedia.
 Author: Piotr Pesta
-Version: 1.1.5
+Version: 1.1.6
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -71,56 +71,57 @@ echo $before_title . $title . $after_title;
 }
 
 if ($languages == 1) { //english lang with local time 
-	$time = getdate();
+	$day = date('j', current_time('timestamp', 0));
+	$month = date('n', current_time('timestamp', 0));
 	$months = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
 	$urlselected = 'https://en.wikipedia.org/wiki/Wikipedia:Selected_anniversaries/';
-	if($time['mon'] == 1) {
+	if($month == 1) {
 		$monthpush = $urlselected.$months[0];
-		$daypush = '<hr \/> '.$months[0].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[0].' '.$day;
 	}
-	if($time['mon'] == 2) {
+	if($month == 2) {
 		$monthpush = $urlselected.$months[1];
-		$daypush = '<hr \/> '.$months[1].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[1].' '.$day;
 	}
-	if($time['mon'] == 3) {
+	if($month == 3) {
 		$monthpush = $urlselected.$months[2];
-		$daypush = '<hr \/> '.$months[2].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[2].' '.$day;
 	}
-	if($time['mon'] == 4) {
+	if($month == 4) {
 		$monthpush = $urlselected.$months[3];
-		$daypush = '<hr \/> '.$months[3].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[3].' '.$day;
 	}
-	if($time['mon'] == 5) {
+	if($month == 5) {
 		$monthpush = $urlselected.$months[4];
-		$daypush = '<hr \/> '.$months[4].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[4].' '.$day;
 	}	
-	if($time['mon'] == 6) {
+	if($month == 6) {
 		$monthpush = $urlselected.$months[5];
-		$daypush = '<hr \/> '.$months[5].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[5].' '.$day;
 	}
-	if($time['mon'] == 7) {
+	if($month == 7) {
 		$monthpush = $urlselected.$months[6];
-		$daypush = '<hr \/> '.$months[6].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[6].' '.$day;
 	}
-	if($time['mon'] == 8) {
+	if($month == 8) {
 		$monthpush = $urlselected.$months[7];
-		$daypush = '<hr \/> '.$months[7].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[7].' '.$day;
 	}
-	if($time['mon'] == 9) {
+	if($month == 9) {
 		$monthpush = $urlselected.$months[8];
-		$daypush = '<hr \/> '.$months[8].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[8].' '.$day;
 	}
-	if($time['mon'] == 10) {
+	if($month == 10) {
 		$monthpush = $urlselected.$months[9];
-		$daypush = '<hr \/> '.$months[9].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[9].' '.$day;
 	}
-	if($time['mon'] == 11) {
+	if($month == 11) {
 		$monthpush = $urlselected.$months[10];
-		$daypush = '<hr \/> '.$months[10].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[10].' '.$day;
 	}
-	if($time['mon'] == 12) {
+	if($month == 12) {
 		$monthpush = $urlselected.$months[11];
-		$daypush = '<hr \/> '.$months[11].' '.$time['mday'];
+		$daypush = '<hr \/> '.$months[11].' '.$day;
 	}
 	$f = new wikiLeech($monthpush);
 	$f->showWiki($daypush, 'More anniversaries:');
