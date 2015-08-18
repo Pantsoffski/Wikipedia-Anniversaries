@@ -6,8 +6,8 @@ Plugin URI: http://smartfan.pl/
 Tags: widget, wikipedia, wikipedia anniversaries, wikipedia widget, anniversaries, calendar
 Author: Piotr Pesta
 Requires at least: 2.8.0
-Tested up to: 4.2
-Stable tag: 1.1.6
+Tested up to: 4.3
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -33,6 +33,8 @@ Or just add .zip file as a new plugin in your Wordpress administration panel.
 1. Wikipedia Anniversaries on right block.
 
 == Changelog ==
+= 1.1.7 =
+* Wordpress 4.3 compatibility
 = 1.1.6 =
 * Fix for site local time support
 = 1.1.5 =

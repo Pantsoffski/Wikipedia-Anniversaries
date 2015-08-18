@@ -4,7 +4,7 @@ Plugin Name: Wikipedia Anniversaries
 Plugin URI: http://smartfan.pl/
 Description: Widget that shows anniversaries from Wikipedia.
 Author: Piotr Pesta
-Version: 1.1.6
+Version: 1.1.7
 Author URI: http://smartfan.pl/
 License: GPL12
 */
@@ -16,7 +16,7 @@ class wiki_this_day extends WP_Widget {
 // konstruktor widgetu
 function wiki_this_day() {
 
-	$this->WP_Widget(false, $name = __('Wikipedia Anniversaries', 'wp_widget_plugin') );
+	parent::__construct(false, $name = __('Wikipedia Anniversaries', 'wp_widget_plugin') );
 
 }
 
