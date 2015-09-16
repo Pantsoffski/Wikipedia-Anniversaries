@@ -16,7 +16,7 @@ class wikiLeech {
  		$matches = array();
     	$pattern = "/$start.(.*?).$end/";
     	if (preg_match($pattern, $data, $matches)) {
-			echo "<div class=\"wikiday\">" . $matches[1] . "</div>";
+			return "<div class=\"wikiday\">" . $matches[1] . "</div>";
 		}
  	}
 }
